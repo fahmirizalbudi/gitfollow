@@ -1,43 +1,82 @@
-# GitHub Follower Automation
+<div align="center">
+<a href="https://github.com/fahmirizalbudi/gitfollow" target="blank">
+<img src="./logo.svg" width="300" alt="Logo" />
+</a>
 
-Script Node.js (TypeScript) untuk otomatisasi mutlak followers GitHub.
+<br />
+<br />
 
-## Fitur Utama
-1. **Auto Follback** - Otomatis follow akun yang baru saja mem-follow Anda.
-2. **Auto Unfollow** - Otomatis unfollow akun yang berhenti mem-follow (unfollow) Anda.
-3. **Pengecualian Lama** - Follower lama Anda yang sudah ada saat script dijalankan pertama kali TIDAK akan di-follback secara otomatis (script akan menyimpan state awal).
+![](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![](https://img.shields.io/badge/GitHub_API-181717?style=for-the-badge&logo=github&logoColor=white)
 
-## Prasyarat
-- Node.js versi 18 atau lebih baru.
-- Personal Access Token GitHub (dengan permission `user` atau minimal `read:user` dan `user:follow`).
+</div>
 
-## Cara Penggunaan
+<br/>
 
-1. **Install Dependencies**
+## GitFollow
+
+GitFollow is an automated real-time tool for managing your GitHub audience. Built in Node.js and TypeScript. This project uses the official GitHub REST API. Key features include:
+
+## Features
+
+- **Auto Follback:** Automatically follow back new users who follow you.
+- **Auto Unfollow:** Automatically unfollow users who unfollowed you (reciprocity).
+- **Non-Backtracker Cleanup:** Identifies and unfollows users that you follow but do not follow you back.
+
+## Tech Stack
+
+- **Node.js**: Asynchronous event-driven JavaScript runtime designed to build scalable network applications.
+- **TypeScript**: Typed superset of JavaScript that compiles to plain JavaScript.
+- **Octokit / REST**: Official GitHub REST API client for interacting with their systems natively.
+
+## Getting Started
+
+To get a local copy of this project up and running, follow these steps.
+
+### Prerequisites
+
+- **Node.js** (v18 or higher).
+- **npm** (Package Manager).
+- **Personal Access Token (PAT)** from GitHub (Requires the `user:follow` scope).
+
+## Installation
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/fahmirizalbudi/gitfollow.git
+   cd gitfollow
+   ```
+
+2. **Install dependencies:**
+
    ```bash
    npm install
-   ```
-
-2. **Pengaturan Environment**
-   Set up file `.env`.
-   ```bash
    cp .env.example .env
    ```
-   Lalu buka file `.env` dan ganti `your_personal_access_token_here` dengan Token GitHub Anda.
 
-3. **Eksekusi Script**
-   Jalankan script menggunakan perintah:
-   ```bash
-   npm start
+3. **Configure the Environment:**
+
+   Open the `.env` file and insert your GitHub Token. Make sure the token has the `user:follow` scope.
+   ```env
+   GITHUB_TOKEN=your_token_here
    ```
-   Atau Anda juga bisa melakukan build terlebih dahulu melalui `npm run build`, lalu menjalankan hasil build-nya dari folder `dist`.
 
-## Cara Kerja Script
-- Saat dijalankan **pertama kali**, script hanya akan mengambil daftar followers Anda saat ini dan menyimpannya ke `followers_db.json`. Ini berfungsi sebagai _baseline_ agar script tahu siapa saja follower lama yang tidak perlu di-follback otomatis.
-- Saat dijalankan **kedua kali dan seterusnya**, script akan membandingkan follower saat ini dengan data di `followers_db.json`.
-  - Jika ada *follower baru*, script akan mem-follow mereka.
-  - Jika ada orang yang *unfollow* Anda, script akan meng-unfollow mereka.
-  - Terakhir, `followers_db.json` akan di-update dengan data terbaru.
+4. **Build the source code:**
 
-## Catatan
-Sebaiknya Anda menjadwalkan script ini menggunakan **cron job** atau dipadankan dengan **GitHub Actions** untuk menjalankannya secara berkala (misalnya setiap hari).
+   ```bash
+   npm run build
+   ```
+
+## Usage
+
+### Running the Application
+
+- **Start Automation:** `npm start`
+
+> The script will establish a baseline on the first run, preventing it from accidentally unfollowing your legacy audience. Leave it running as it will automatically check for changes every minute.
+
+## License
+
+All rights reserved. This project is for personal automation testing and cannot be used or distributed without permission.
