@@ -1,0 +1,6 @@
+node_modules/
+dist/
+followers_db.json
+.env
+.env.local
+.DS_Store
